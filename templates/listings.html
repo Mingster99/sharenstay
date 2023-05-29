@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <div class="header", data-position="inline">
+            <h2 class="border-bottom mb-4">Listings</h2>
+            <form action="" method="get">
+                <div class="sort-section mb-4">
+                    <label><b>Sort By:</b></label>
+                    <div class="form-check form-check-inline">
+                        <input onchange="this.form.submit()" class="form-check-input" type="radio" name="sort_by" id="sort-by-reviews" value="number_of_reviews" {% if sort_by == 'number_of_reviews' %}checked{% endif %}>
+                        <label class="form-check-label" for="sort-by-reviews">Number of Reviews</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input onchange="this.form.submit()" class="form-check-input" type="radio" name="sort_by" id="sort-by-min-nights" value="minimum_nights" {% if sort_by == 'minimum_nights' %}checked{% endif %}>
+                        <label class="form-check-label" for="sort-by-min-nights">Minimum Nights</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input onchange="this.form.submit()" class="form-check-input" type="radio" name="sort_by" id="sort-by-price" value="price" {% if sort_by == 'price' %}checked{% endif %}>
+                        <label class="form-check-label" for="sort-by-price">Price</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                            <select
+                                class="form-control mb-2"
+                                id="sort-order"
+                                name="sort_order"
+                                onchange="this.form.submit()"
+                            >
+                                <option value="asc" {% if sort_order == 'asc' %}selected{% endif %}>Lowest to Highest</option>
+                                <option value="desc" {% if sort_order == 'desc' %}selected{% endif %}>Highest to Lowest</option>
+                            </select>
+                    </div>
+                </div>
+                <div class="filter-section mb-4">
+                    <label><b>Filter By: </b></label>
+                    <div class="form-row align-items-center">
+                        <div class="col-auto">
+                            <label class="sr-only" for="neighbourhood-filter"
+                                >Neighbourhood</label
+                            >
+                            <select
+                                class="form-control mb-2"
+                                id="neighbourhood-filter"
+                                name="neighbourhood"
+                                onchange="this.form.submit()"
+                            >
+                                <option value="">Neighbourhood</option>
+                                {% for hood in neighbourhoods %}
+                                <option value="{{ hood }}" {% if hood == neighbourhood %}selected{% endif %}>{{ hood }}</option>
+                                {% endfor %}
+                            </select>
+                            </div>
+                        <div class="col-auto">
+                            <label class="sr-only" for="room-type-filter">Room Type</label>
+                            <select
+                                class="form-control mb-2"
+                                id="room-type-filter"
+                                name="room_type"
+                                onchange="this.form.submit()"
+                            >
+                                <option value="">Room Type</option>
+                                {% for type in room_types %}
+                                <option value="{{ type }}" {% if type == room_type %}selected{% endif %}>{{ type }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                {% for row in data.rows %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ row['name'] }}</h5>
+                                <p class="card-text"><strong>Host:</strong> {{ row['host_name'] }}</p>
+                                <p class="card-text"><strong>Neighbourhood:</strong> {{ row['neighbourhood'] }}</p>
+                                <p class="card-text"><strong>Room Type:</strong> {{ row['room_type'] }}</p>
+                                <p class="card-text"><strong>Price:</strong> {{ row['price'] }}</p>
+                                <p class="card-text"><strong>Minimum Nights:</strong> {{ row['minimum_nights'] }}</p>
+                                <p class="card-text"><strong>Number of Reviews:</strong> {{ row['number_of_reviews'] }}</p>
+                                <p class="card-text"><strong>License:</strong> {{ row['license'] }}</p>
+                                <p class="card-text"><strong>Average Rating:</strong> {{ row['average_review'] }}</p>
+                                <a href="{{ url_for('get_listing',listing_id = row['id'] ) }}" class="btn btn-primary btn-sm">View Listing</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

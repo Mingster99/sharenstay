@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+<!doctype html>
+<html>
+  <head>
+    <title>Confirm Logout</title>
+  </head>
+  <body>
+    <h1>Are you sure you want to log out?</h1>
+    <form method="post" action="{{ url_for('logout') }}">
+      <button type="submit">Yes, log me out</button>
+    </form>
+  </body>
+</html>

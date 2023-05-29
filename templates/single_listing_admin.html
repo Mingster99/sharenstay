@@ -1,0 +1,37 @@
+{% extends "layout_admin.html" %}
+{% block content %}
+    <div class="content-section">
+        <div class="header", data-position="inline">
+        <div class="row">
+            {% for row in data.rows %}
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ row['name'] }}</h5>
+                            <p class="card-text"><strong>Host:</strong> {{ row['host_name'] }}</p>
+                            <p class="card-text"><strong>Neighbourhood:</strong> {{ row['neighbourhood'] }}</p>
+                            <p class="card-text"><strong>Room Type:</strong> {{ row['room_type'] }}</p>
+                            <p class="card-text"><strong>Price:</strong> {{ row['price'] }}</p>
+                            <p class="card-text"><strong>Minimum Nights:</strong> {{ row['minimum_nights'] }}</p>
+                            <p class="card-text"><strong>Number of Reviews:</strong> {{ row['number_of_reviews'] }}</p>
+                            <p class="card-text"><strong>Host Listings:</strong> {{ row['calculated_host_listings_count'] }}</p>
+                            <p class="card-text"><strong>Availability:</strong> {{ row['availability_365'] }}</p>
+                            <p class="card-text"><strong>License:</strong> {{ row['license'] }}</p>
+                            <a href="{{ url_for('listing_review_admin',listing_id = row['id'] ) }}" class="btn btn-primary btn-sm">View Reviews</a>
+                            <a href="{{url_for('update_listing', listing_id = listing_id)}}" class="btn btn-primary btn-sm">Edit Listing</a>
+                            <a href="{{ url_for('delete_listing', listing_id = listing_id) }}" class="btn btn-primary btn-sm">Delete Listing</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src = "/static/airbnb.jpeg" alt="Image of Room">
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

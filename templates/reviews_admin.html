@@ -1,0 +1,26 @@
+{% extends "layout_admin.html" %} {% block content %}
+<div class="content-section">
+  <h2 class="border-bottom mb-4">Reviews</h2>
+  <div class="col-auto mb-4"><a href="{{ url_for('add_review_admin', listing_id = listing_id) }}" class="btn btn-primary">+ Add Review</a></div>
+  <div style="overflow-x: auto">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          {% for column in data.columns %}
+          <th>{{ column }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data.rows %}
+        <tr>
+          {% for column in data.columns %}
+          <td>{{ row[column] }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,8 @@
+psycopg2
+Flask==2.0.0
+flask_cors
+SQLAlchemy
+sqlalchemy_utils
+email_validator
+requests
+flask_wtf
